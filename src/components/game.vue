@@ -1,15 +1,23 @@
 <template>
   <div class="game">
-    <p v-if="this.counter%2 ==0">请黑棋落子</p>
-    <p v-if="this.counter%2 !==0">请白棋落子</p>
+    <div style="clear:both;overflow:hidden;margin:auto;width:37.5vw;;margin:10px auto">
+      <span style="float:left;font-size:22px;">web五子棋</span> 
+      <div class='blackDot' style="width:20px;height:20px;float:right;display: inline-block;margin: 0px;margin-left:10px" v-if="this.counter%2 ==0"></div>
+      <div class='whiteDot' style="width:20px;height:20px;float:right;display: inline-block;margin: 0px;margin-left:10px" v-if="this.counter%2 !==0"></div>
+    </div>
+  
     <div class="gridFather">
       <table>
         <tr v-for="m in 15">
-          <td v-for="n in 15" @click="downClick($event)"></td>
+          <td v-for="n in 15" @click="flag && downClick($event)"></td>
         </tr>
       </table>
-      <!-- <div class="grid" v-for="i in 225" @click="downClick($event)">{{i}}</div> -->
     </div>
+    <div style="margin-top:10px">
+      <el-button :disabled = "counter <= 0 || !this.flag" @click="goBack">悔棋</el-button>
+      <el-button type="primary" @click="againNew">重新开局</el-button>
+    </div>
+    
   </div>
 </template>
 
@@ -19,7 +27,8 @@ export default {
   data() {
     return {
       counter: 0,
-      dotarray: ["", "", "", ""]
+      dotarray: ["", "", "", ""],
+      flag:true
     };
   },
   methods: {
@@ -29,17 +38,11 @@ export default {
       }
       this.counter++;
       if (this.counter % 2 == 0) {
-        e.currentTarget.innerHTML = "<div class='whiteDot'></div>";
+        e.currentTarget.innerHTML = "<div class='whiteDot' id=q" + this.counter + "></div>";
       } else {
-        e.currentTarget.innerHTML = "<div class='blackDot'></div>";
+        e.currentTarget.innerHTML = "<div class='blackDot'  id=q" + this.counter + "></div>";
       }
-    //   this.$nextTick(function(){
-    //       console.log('dddddddddd')
-    //   })
-      setTimeout(function(){
-        this.isSuccess(e);
-      }.bind(this),1000)
-      
+      this.isSuccess(e);
     },
     //  判断是否获胜
     isSuccess(e) {
@@ -89,18 +92,38 @@ export default {
       // 判断一下每条线
       for (var i = 0; i < 4; i++) {
         if (this.dotarray[i].indexOf(wincolor) >= 0) {
+          this.flag = false
           if (this.counter % 2 !== 0) {
-            alert("黑棋赢");
-          } else alert("白棋赢");
+            this.$alert('黑棋获胜', {
+              confirmButtonText: '确定',
+            });
+          } else{
+               this.$alert('白棋获胜', {
+                confirmButtonText: '确定',
+              });
+          };
           break;
         }
       }
       // console.log(this.dotarray)
+    },
+    // 悔棋功能
+    goBack() {
+      let thisid = '#q' + this.counter
+      $(thisid).remove();
+      this.counter --
+    },
+    // 重新开始
+    againNew() {
+      $( "div[id*=q]" ).remove();
+      this.flag = true
+      this.counter = 0
     }
   }
 };
 </script>
 <style>
+.game{width: 80%;margin: auto;text-align: center}
 .gridFather {
   width: 37.5vw;
   cursor: pointer;
@@ -128,5 +151,20 @@ export default {
   border: 1px solid #dddddd;
   margin: auto;
   margin-top: 10%;
+}
+table{
+  border-collapse:collapse;
+}
+
+@media screen and (max-width: 700px) {
+  .gridFather {
+      width: 90vw;
+      margin: auto
+    }
+  .gridFather table td {
+      width: 6vw;
+      height: 6vw;
+    }
+    .game{width: 100%}
 }
 </style>
