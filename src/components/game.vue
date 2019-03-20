@@ -1,7 +1,7 @@
 <template>
   <div class="game">
     <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" 
-    width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1336971085&auto=1&height=66"></iframe>
+    width=330 height=86 src="https://music.163.com/outchain/player?type=2&id=1336971085&auto=1&height=66"></iframe>
     <div id="thistitle">
       <span style="float:left;font-size:22px;">五子棋</span> 
       <div class='blackDot' style="width:20px;height:20px;float:right;display: inline-block;margin: 0px;margin-left:10px" v-if="this.counter%2 ==0"></div>
@@ -18,10 +18,10 @@
         </tr>
       </table>
     </div>
-    <div style="margin-top:10px">
+    <div class="bottons">
       <el-button :disabled = "counter <= 0 || !this.flag" @click="goBack">悔棋</el-button>
       <el-button type="primary" @click="againNew">重开</el-button>
-      <el-button type="primary" @click="oppenDanger = !oppenDanger">{{oppenDanger?'关闭':'开启'}}危险检测</el-button>
+      <el-button type="primary" @click="oppenDanger = !oppenDanger">{{oppenDanger?'关闭':'开启'}}危检</el-button>
       <el-button type="primary" @click="opennumber">计数</el-button>
 
     </div>
@@ -257,4 +257,5 @@ table{
     .game{width: 100%}
 }
 .displayNum{display: none;}
+.bottons button{margin-top: 20px}
 </style>
