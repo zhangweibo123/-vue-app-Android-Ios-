@@ -256,5 +256,5 @@ table{
     }
     .game{width: 100%}
 }
-.displayNum{display: inline;}
+.displayNum{display: none;}
 </style>
