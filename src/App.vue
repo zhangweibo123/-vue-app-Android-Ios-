@@ -24,5 +24,5 @@ export default {
 tap-highlight-color: rgba(0,0,0,0);
 }
  *{ -webkit-tap-highlight-color: rgba(0,0,0,0);-webkit-tap-highlight-color: transparent;}
-
+.el-message-box{width: 350px}
 </style>
