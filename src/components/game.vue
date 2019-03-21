@@ -48,9 +48,11 @@ export default {
       }
       this.counter++;
       if (this.counter % 2 == 0) {
-        e.currentTarget.innerHTML = `<div class='whiteDot' id=q${this.counter}><span class="displayNum">${this.counter}</span></div>`;
+        let whiteDot = `<div class='whiteDot' id=q${this.counter}><span class="${this.isNumber?'displayNone':'displayBlock'}">${this.counter}</span></div>`
+        e.currentTarget.innerHTML = whiteDot;
       } else {
-        e.currentTarget.innerHTML = `<div class='blackDot' id=q${this.counter}><span class="displayNum">${this.counter}</span></div>`;
+        let blackDot = `<div class='blackDot' id=q${this.counter}><span class="${this.isNumber?'displayNone':'displayBlock'}">${this.counter}</span></div>`
+        e.currentTarget.innerHTML = blackDot;
       }
       this.isSuccess(e);
     },
@@ -137,7 +139,7 @@ export default {
       let whiteDan3 = 'bwwww.'
       let whiteDan4 = '.wwwwb'
       let whiteDan5 = '.ww.w.'
-      let whiteDan6 = '.b.bb.'
+      let whiteDan6 = '.w.ww.'
       let whiteDan7 = 'www.w'
       let whiteDan8 = 'ww.ww'
       let whiteDan9 = 'w.www'
@@ -198,9 +200,11 @@ export default {
     opennumber() {
       this.isNumber = !this.isNumber
       if(this.isNumber){
-        $('.displayNum').css('display','none')
+        $('.displayNone').css('display','none')
+        $('.displayBlock').css('display','none')
       }else{
-        $('.displayNum').css('display','inline')
+        $('.displayNone').css('display','inline')
+        $('.displayBlock').css('display','inline')
       }
       
     }
@@ -256,6 +260,7 @@ table{
     }
     .game{width: 100%}
 }
-.displayNum{display: none;}
+.displayNone{display: none;}
+.displayBlock{display: inline;}
 .bottons button{margin-top: 20px}
 </style>

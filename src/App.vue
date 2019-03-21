@@ -16,4 +16,13 @@ export default {
      background-image: url(./assets/bg.jpg);
     background-size:100% 100%; 
  }
+ *{
+-webkit-tap-highlight-color: rgba(0,0,0,0);
+-moz-tap-highlight-color: rgba(0,0,0,0);
+-o-tap-highlight-color: rgba(0,0,0,0);
+-ms-tap-highlight-color: rgba(0,0,0,0);
+tap-highlight-color: rgba(0,0,0,0);
+}
+ *{ -webkit-tap-highlight-color: rgba(0,0,0,0);-webkit-tap-highlight-color: transparent;}
+
 </style>
